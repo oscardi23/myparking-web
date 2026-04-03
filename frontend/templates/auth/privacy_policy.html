@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/head :: head-main(~{})">
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+
+    <!-- Header Navigation -->
+    <div th:replace="layout/header :: header-main"></div>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 md:py-20 animate-fade-in">
+        <div class="auth-card">
+            <h1 class="text-3xl md:text-4xl font-bold mb-8 text-slate-900 dark:text-white tracking-tight">
+                Política de Privacidad
+            </h1>
+            
+            <p class="text-slate-500 dark:text-slate-400 mb-8 leading-relaxed">
+                Nos tomamos muy en serio la privacidad de tus datos. Esta política describe cómo recopilamos, usamos y protegemos la información en nuestro sistema de gestión de parqueaderos.
+            </p>
+
+            <div class="space-y-10">
+                <!-- Sección 1 -->
+                <section>
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+                        <span class="material-symbols-outlined text-primary">info</span>
+                        <span>1. Información que recopilamos</span>
+                    </h2>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Recopilamos información necesaria para la operación del parqueadero, incluyendo:
+                    </p>
+                    <ul class="list-disc ml-6 mt-4 space-y-2 text-slate-600 dark:text-slate-400">
+                        <li>Datos de registro (Nombre, apellido, correo electrónico).</li>
+                        <li>Información del vehículo (Placa, tipo de vehículo).</li>
+                        <li>Registros de entrada y salida para el cálculo de tarifas.</li>
+                        <li>Información de pago procesada de forma segura por terceros.</li>
+                    </ul>
+                </section>
+
+                <!-- Sección 2 -->
+                <section>
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+                        <span class="material-symbols-outlined text-primary">settings</span>
+                        <span>2. Uso de la información</span>
+                    </h2>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Utilizamos los datos recopilados exclusivamente para:
+                    </p>
+                    <ul class="list-disc ml-6 mt-4 space-y-2 text-slate-600 dark:text-slate-400">
+                        <li>Gestionar el acceso y la ocupación de las instalaciones.</li>
+                        <li>Automatizar el proceso de cobro y facturación.</li>
+                        <li>Proporcionar soporte técnico y mejorar la experiencia del usuario.</li>
+                        <li>Cumplir con obligaciones legales y de seguridad.</li>
+                    </ul>
+                </section>
+
+                <!-- Sección 3 -->
+                <section>
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+                        <span class="material-symbols-outlined text-primary">security</span>
+                        <span>3. Protección de datos</span>
+                    </h2>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Implementamos medidas de seguridad robustas para proteger tu información contra acceso no autorizado, alteración o destrucción.
+                    </p>
+                </section>
+
+                <div class="mt-12 pt-8 border-t border-slate-100 dark:border-slate-800 text-center">
+                    <p class="text-sm text-slate-400">Última actualización: 28 de enero de 2026</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="layout/footer :: footer-main"></div>
+
+    <script th:src="@{/js/taiwind-config.js}"></script>
+</body>
+</html>

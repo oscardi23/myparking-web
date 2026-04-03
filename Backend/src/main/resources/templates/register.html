@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+
+<head th:replace="layout/head :: head-main(title='Registro')">
+    <meta charset="UTF-8">
+    <title>Registro</title>
+</head>
+<body>
+
+
+
+<div class="content-main">
+
+    <div th:replace="/layout/left-panel :: left-panel-login"></div>
+
+
+
+    <div class="content-form" >
+
+        <div th:replace="/layout/img-mobile :: img-mobile" >
+        </div>
+
+
+        <div class="w-full max-w-[400px]">
+            <!-- Headers -->
+            <div id="header-step-1" class="flex flex-col gap-2 mb-8">
+                <h1 class="auth-header-title">Crear una cuenta</h1>
+                <p class="auth-header-desc">Ingresa tu email para comenzar el registro.</p>
+            </div>
+
+            <div id="header-step-2" class="flex flex-col gap-2 mb-8 hidden">
+                <h1 class="auth-header-title">Verifica tu email</h1>
+                <p class="auth-header-desc">Ingresa el código de 6 dígitos enviado a <span id="display-email" class="font-semibold text-primary"></span></p>
+            </div>
+
+            <div id="header-step-3" class="flex flex-col gap-2 mb-8 hidden">
+                <h1 class="auth-header-title">Completa tu perfil</h1>
+                <p class="auth-header-desc">Casi terminamos. Ingresa los datos de tu parqueadero.</p>
+            </div>
+
+            <!-- Form Section -->
+            <form class="flex flex-col gap-4" id="registration-form">
+
+                <!-- Step 1: Email Only -->
+                <div id="step-1" class="flex flex-col gap-4 animate-fade-in">
+                    <div class="flex flex-col gap-1">
+                        <label class="auth-label" for="email">Email</label>
+                        <input class="w-full border p-3 rounded-lg" id="email" placeholder="nombre@empresa.com" type="email" required/>
+                    </div>
+                    <button id="btn-to-step-2" class="btn-auth-primary mt-2" type="button">
+                         <span id="btnText">Siguiente</span>
+                                <svg id="btnSpinner" class="hidden animate-spin h-5 w-5 ml-3 text-white" viewBox="0 0 24 24">
+                                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                        
+                    </button>
+                </div>
+
+                <!-- Step 2: 6-Digit Verification -->
+                <div id="step-2" class="flex flex-col gap-6 hidden animate-fade-in">
+                    <div class="flex justify-center gap-2" id="otp-container">
+                        <input maxlength="1" class="otp-input" type="text" inputmode="numeric" required/>
+                        <input maxlength="1" class="otp-input" type="text" inputmode="numeric" required/>
+                        <input maxlength="1" class="otp-input" type="text" inputmode="numeric" required/>
+                        <input maxlength="1" class="otp-input" type="text" inputmode="numeric" required/>
+                        <input maxlength="1" class="otp-input" type="text" inputmode="numeric" required/>
+                        <input maxlength="1" class="otp-input" type="text" inputmode="numeric" required/>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                        <button id="btn-to-step-3" class="btn-auth-primary" type="button">
+                            Verificar Código
+                        </button>
+                        <button id="btn-back-to-1" class="flex w-full items-center justify-center rounded-lg border border-slate-200 dark:border-slate-600 py-3 px-5 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200" type="button">
+                            Volver / Cambiar Email
+                        </button>
+                    </div>
+
+
+                        <div class="text-center mt-4">
+                            <p class="text-sm text-slate-500">
+                                El código expira en: <span id="timer" class="font-bold text-primary">10:00</span>
+                            </p>
+                            <button id="btn-resend" class="text-sm text-primary hover:underline mt-2 opacity-50 cursor-not-allowed" disabled>
+                                Reenviar código
+
+
+                                <svg id="btnSpinner" class="hidden animate-spin h-5 w-5 ml-3 text-white" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+
+                <!-- Step 3: Complete Profile -->
+                <div id="step-3" class="flex flex-col gap-4 hidden animate-fade-in">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex flex-col gap-1">
+                            <label class="auth-label" for="name">Nombres</label>
+                            <input class="auth-input" id="name" placeholder="Ej: Carlos" type="text" required/>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label class="auth-label" for="lastName">Apellidos</label>
+                            <input class="auth-input" id="lastName" placeholder="Ej: Pérez" type="text" required/>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="auth-label" for="password">Contraseña</label>
+                        <div class="relative group">
+                            <input class="auth-input pr-12" id="password" placeholder="Mínimo 8 caracteres" type="password" required/>
+                            <div class="absolute right-0 top-0 h-full flex items-center pr-4 text-slate-400 cursor-pointer hover:text-primary transition-colors" id="toggle-password">
+                                <span class="material-symbols-outlined text-[20px]">visibility_off</span>
+                            </div>
+                        </div>
+                        <!-- Password Checklist -->
+                        <div class="flex flex-col gap-2 mt-2 px-1">
+                            <div id="check-length" class="flex items-center gap-2 text-[12px] text-slate-500">
+                                <span class="material-symbols-outlined text-[16px]">close</span>
+                                <span>Mínimo 8 caracteres</span>
+                            </div>
+                            <div id="check-upper" class="flex items-center gap-2 text-[12px] text-slate-500">
+                                <span class="material-symbols-outlined text-[16px]">close</span>
+                                <span>Al menos una letra mayúscula</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="auth-label" for="password-confirm">Confirmar Contraseña</label>
+                        <div class="relative group">
+                            <input class="auth-input pr-12" id="password-confirm" placeholder="Repite tu contraseña" type="password" required/>
+                            <div class="absolute right-0 top-0 h-full flex items-center pr-4 text-slate-400 cursor-pointer hover:text-primary transition-colors" id="toggle-password-confirm">
+                                <span class="material-symbols-outlined text-[20px]">visibility_off</span>
+                            </div>
+                        </div>
+                        <div id="check-match" class="flex items-center gap-2 text-[12px] text-slate-500 mt-2 px-1">
+                            <span class="material-symbols-outlined text-[16px]">close</span>
+                            <span>Las contraseñas coinciden</span>
+                        </div>
+                    </div>
+                    <button id="btn-submit" class="btn-auth-primary mt-4" type="submit">
+                        Finalizar Registro
+                    </button>
+                    <button id="btn-back-to-1-from-3" class="text-sm text-center text-slate-500 hover:text-primary transition-colors mt-2" type="button">
+                        Cambiar de correo
+                    </button>
+                </div>
+            </form>
+
+            <!-- Footer -->
+            <div class="flex justify-center gap-2 mt-8 text-sm font-normal text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-6">
+                <p>¿Ya tienes una cuenta?</p>
+                <a class="font-semibold text-primary hover:underline transition-colors" th:href="@{/auth/login}">Iniciar sesión</a>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<!-- Toast -->
+<div id="toast"
+     class="fixed top-5 right-5 hidden px-4 py-3 rounded-lg shadow-lg text-white font-semibold transition-all">
+</div>
+
+
+<script th:src="@{/js/taiwind-config.js}"></script>
+<script th:src="@{/js/register.js}"></script>
+
+</body>
+</html>

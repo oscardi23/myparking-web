@@ -1,0 +1,72 @@
+# =====================
+# Spring Boot / Java
+# =====================
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# Maven / Gradle
+target/
+build/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse / IDE
+.settings/
+.project
+.classpath
+.idea/
+*.swp
+
+# =====================
+# Spring Boot sensitive files
+# =====================
+
+# Properties with secrets
+backend/src/main/resources/application.properties
+backend/src/main/resources/application-local.properties
+backend/src/main/resources/application-secret.properties
+
+# dotenv / local environment files
+*.env
+*.secret
+*.local
+
+# =====================
+# Thymeleaf / frontend
+# =====================
+
+# Node / Tailwind / JS build
+node_modules/
+dist/
+public/
+
+# Tailwind generated CSS
+*.css.map
+
+# =====================
+# Misc
+# =====================
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.out
+
+# Java temp
+*.tmp
+
+# Backup files
+*~

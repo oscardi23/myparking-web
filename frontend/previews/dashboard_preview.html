@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Preview Dashboard - MyParking</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23136dec'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M13 3H6v18h4v-6h3c3.31 0 6-2.69 6-6s-2.69-6-6-6zm.2 8H10V7h3.2c1.1 0 2 .9 2 2s-.9 2-2 2z'/%3E%3C/svg%3E"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex overflow-x-hidden">
+    
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 hidden lg:hidden transition-opacity duration-300 opacity-0"></div>
+
+    <!-- Sidebar -->
+    <aside id="admin-sidebar" class="fixed inset-y-0 left-0 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col z-50 transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 ease-in-out">
+        <div class="p-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white">
+                    <span class="material-symbols-outlined">local_parking</span>
+                </div>
+                <span class="text-xl font-bold tracking-tight">MyParking</span>
+            </div>
+            <!-- Close button for mobile -->
+            <button id="close-sidebar" class="lg:hidden p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        
+        <nav class="flex-1 px-4 space-y-2 mt-4">
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary font-semibold">
+                <span class="material-symbols-outlined">dashboard</span> Inicio
+            </a>
+            <a href="clientes_preview.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                <span class="material-symbols-outlined">person</span> Clientes
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                <span class="material-symbols-outlined">directions_car</span> Vehículos
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                <span class="material-symbols-outlined">payments</span> Tarifas
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-slate-200 dark:border-slate-800">
+            <button class="flex items-center gap-3 px-4 py-3 w-full rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors">
+                <span class="material-symbols-outlined">logout</span> Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <!-- Header -->
+        <header class="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-4 lg:px-8 shrink-0">
+            <div class="flex items-center gap-4">
+                <button id="menu-toggle" class="lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <h2 class="text-lg font-semibold lg:hidden">MyParking</h2>
+            </div>
+            
+            <div class="flex items-center gap-4 ml-auto">
+                <div class="flex flex-col items-end hidden sm:flex">
+                    <span class="text-sm font-semibold">Juan Pérez</span>
+                    <span class="text-xs text-slate-500">Administrador</span>
+                </div>
+                <div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center border border-slate-300 dark:border-slate-700">
+                    <span class="material-symbols-outlined">person</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="flex-1 p-4 lg:p-8 overflow-y-auto space-y-8">
+            <div id="dashboard-content" class="space-y-8">
+                <!-- KPIs -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                        <div class="h-12 w-12 rounded-lg bg-green-500/10 text-green-500 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-3xl">check_circle</span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-slate-500">Espacios Libres</p>
+                            <h3 class="text-2xl font-bold">42 <span class="text-sm font-normal text-slate-400">/ 100</span></h3>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                        <div class="h-12 w-12 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-3xl">payments</span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-slate-500">Ingresos Hoy</p>
+                            <h3 class="text-2xl font-bold">$125.50</h3>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                        <div class="h-12 w-12 rounded-lg bg-orange-500/10 text-orange-500 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-3xl">directions_car</span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-slate-500">Vehículos Dentro</p>
+                            <h3 class="text-2xl font-bold">58</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Operations -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">add_box</span> Entrada de Vehículo
+                        </h3>
+                        <form class="space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Placa</label>
+                                    <input type="text" placeholder="ABC-123" class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 focus:ring-primary focus:border-primary">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Tipo</label>
+                                    <select class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 focus:ring-primary focus:border-primary">
+                                        <option>Automóvil</option>
+                                        <option>Motocicleta</option>
+                                        <option>Camioneta</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" class="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition-colors shadow-lg shadow-primary/20">
+                                Registrar Entrada
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.getElementById("menu-toggle");
+            const closeSidebar = document.getElementById("close-sidebar");
+            const sidebar = document.getElementById("admin-sidebar");
+            const backdrop = document.getElementById("sidebar-backdrop");
+
+            function toggleSidebar(show) {
+                if (show) {
+                    backdrop.classList.remove("hidden");
+                    setTimeout(() => {
+                        backdrop.classList.add("opacity-100");
+                        sidebar.classList.remove("-translate-x-full");
+                    }, 10);
+                } else {
+                    sidebar.classList.add("-translate-x-full");
+                    backdrop.classList.remove("opacity-100");
+                    setTimeout(() => {
+                        backdrop.classList.add("hidden");
+                    }, 300);
+                }
+            }
+
+            if (menuToggle) menuToggle.addEventListener("click", () => toggleSidebar(true));
+            if (closeSidebar) closeSidebar.addEventListener("click", () => toggleSidebar(false));
+            if (backdrop) backdrop.addEventListener("click", () => toggleSidebar(false));
+            
+            window.addEventListener("resize", () => {
+                if (window.innerWidth >= 1024 && !backdrop.classList.contains("hidden")) {
+                    toggleSidebar(false);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

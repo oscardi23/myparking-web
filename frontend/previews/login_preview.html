@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>MyParking - Vista Previa Login</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23136dec'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M13 3H6v18h4v-6h3c3.31 0 6-2.69 6-6s-2.69-6-6-6zm.2 8H10V7h3.2c1.1 0 2 .9 2 2s-.9 2-2 2z'/%3E%3C/svg%3E"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,FILL@0..1,wght@400,GRAD@0,opsz@24&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        /* MyParking - Auth Common Styles (Integrado para Preview) */
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.5s ease-out forwards;
+        }
+
+        .content-main-login {
+            @apply w-full min-h-screen flex flex-row bg-slate-50 dark:bg-slate-950;
+        }
+
+        .auth-side-panel {
+            @apply w-1/2 hidden lg:flex relative flex-col justify-between bg-slate-900 p-12 text-white overflow-hidden;
+        }
+
+        .content-login-form {
+            @apply flex-1 flex flex-col justify-center items-center p-8;
+        }
+
+        .auth-card {
+            @apply bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-8 md:p-12;
+        }
+
+        .auth-input {
+            @apply flex w-full h-12 px-4 rounded-lg border border-slate-200 dark:border-slate-600 
+                   bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white
+                   focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none 
+                   placeholder:text-slate-400;
+        }
+
+        .auth-input-lg {
+            @apply h-14;
+        }
+
+        .btn-auth-primary {
+            @apply flex w-full items-center justify-center rounded-lg bg-primary py-4 px-5 
+                   text-base font-bold text-white shadow-md hover:bg-blue-600 
+                   transition-all transform active:scale-[0.99] focus:outline-none 
+                   focus:ring-2 focus:ring-primary/20 focus:ring-offset-2;
+        }
+
+        .auth-label {
+            @apply text-slate-900 dark:text-white text-sm font-medium mb-1.5;
+        }
+
+        .auth-header-title {
+            @apply text-slate-900 dark:text-white tracking-tight text-[32px] font-bold leading-tight;
+        }
+
+        .auth-header-desc {
+            @apply text-slate-500 dark:text-slate-400 text-sm font-normal;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+
+    <div class="content-main-login">
+        <!-- Panel Lateral (Simulando Fragmento) -->
+        <div class="auth-side-panel">
+            <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD6kynM31FGVR7RKziuVd-6PB8QqHBl64UfxHDIfbfkyN6ulYhQCikFuHwuFFCkFVyil8cdOZ8lWGPUf8MKVL0v7osmA8mP7jzBZpJ2nHpoDDGyTIWmJ2-Sy3Ap0GW-Co5JjgzoPEkVL6keVjuebdzHyQgC_eTxM78XyKv6XFweXJV1OKGzYzclans8bPHNenpKlZDJzGvuGBVb7OSOMSya4jFXF4htBSd0dLwe7Wg1-yqFMYFkwFVddGQGo26vSRH5Gfcszbt3rm8");'></div>
+            <div class="absolute inset-0 z-10 bg-gradient-to-t from-slate-900/95 via-slate-900/60 to-slate-900/30 mix-blend-multiply"></div>
+            <div class="relative z-20 flex items-center gap-3 animate-fade-in">
+                <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/90 text-white shadow-lg shadow-primary/30 backdrop-blur-sm">
+                    <span class="material-symbols-outlined text-3xl">local_parking</span>
+                </div>
+                <div>
+                    <span class="block text-xl font-bold tracking-tight">MyParking</span>
+                    <span class="block text-xs font-medium text-slate-300 tracking-wider uppercase">Smart Parking</span>
+                </div>
+            </div>
+            <div class="relative z-20 max-w-xl space-y-4">
+                <h2 class="text-3xl font-bold leading-tight tracking-tight lg:text-4xl text-white">Únete a la red MyParking</h2>
+                <p class="text-slate-300 text-lg leading-relaxed max-w-md">La plataforma líder para la gestión inteligente de tus espacios.</p>
+            </div>
+            <div class="relative z-20 border-t border-white/10 pt-6">
+                <p class="text-xs text-slate-400">© 2026 MyParking System. Todos los derechos reservados.</p>
+            </div>
+        </div>
+
+        <div class="content-login-form">
+            <!-- Mobile Logo -->
+            <div class="lg:hidden flex flex-col items-center gap-3 mb-8">
+                <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-white shadow-lg shadow-primary/30">
+                    <span class="material-symbols-outlined text-3xl">local_parking</span>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">MyParking</span>
+            </div>
+
+            <div class="w-full max-w-[400px]">
+                <!-- Header Section -->
+                <div class="flex flex-col gap-2 mb-8">
+                    <h1 class="auth-header-title">Inicia sesión</h1>
+                    <p class="auth-header-desc">¡Bienvenido de nuevo! Por favor ingrese sus datos.</p>
+                </div>
+
+                <!-- Form Section -->
+                <form class="flex flex-col gap-5">
+                    <div class="flex flex-col gap-1">
+                        <label class="auth-label">Correo electrónico</label>
+                        <input class="auth-input auth-input-lg" placeholder="nombre@empresa.com" type="email" required/>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label class="auth-label">Contraseña</label>
+                        <div class="relative group">
+                            <input class="auth-input auth-input-lg pr-12" placeholder="Ingrese su contraseña" type="password" required/>
+                            <div class="absolute right-0 top-0 h-full flex items-center pr-4 text-slate-400 cursor-pointer hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-[24px]">visibility_off</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-end mt-1">
+                        <a class="text-sm font-semibold text-primary hover:underline transition-colors" href="#">¿Olvidaste tu contraseña?</a>
+                    </div>
+
+                    <button class="btn-auth-primary mt-2" type="button">
+                        Iniciar Sesión
+                    </button>
+                </form>
+
+                <!-- Footer -->
+                <div class="flex justify-center gap-2 mt-8 text-sm font-normal text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-6">
+                    <p>¿No tienes una cuenta?</p>
+                    <a class="font-semibold text-primary hover:underline transition-colors" href="register_preview.html">Registrarse</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulación sencilla de toggle password para el preview
+        document.querySelector('.material-symbols-outlined').parentElement.addEventListener('click', function() {
+            const input = this.parentElement.querySelector('input');
+            const icon = this.querySelector('span');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerText = 'visibility';
+            } else {
+                input.type = 'password';
+                icon.innerText = 'visibility_off';
+            }
+        });
+    </script>
+</body>
+</html>

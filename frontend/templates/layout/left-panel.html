@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- Fragment: Common Left Panel -->
+<div th:fragment="left-panel-login" class="relative hidden lg:flex w-1/2 flex-col justify-between bg-slate-900 p-12 text-white overflow-hidden group/design-root">
+    <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD6kynM31FGVR7RKziuVd-6PB8QqHBl64UfxHDIfbfkyN6ulYhQCikFuHwuFFCkFVyil8cdOZ8lWGPUf8MKVL0v7osmA8mP7jzBZpJ2nHpoDDGyTIWmJ2-Sy3Ap0GW-Co5JjgzoPEkVL6keVjuebdzHyQgC_eTxM78XyKv6XFweXJV1OKGzYzclans8bPHNenpKlZDJzGvuGBVb7OSOMSya4jFXF4htBSd0dLwe7Wg1-yqFMYFkwFVddGQGo26vSRH5Gfcszbt3rm8");'></div>
+    <div class="absolute inset-0 z-10 bg-gradient-to-t from-slate-900/95 via-slate-900/60 to-slate-900/30 mix-blend-multiply"></div>
+    <div class="relative z-20 flex items-center gap-3 animate-fade-in">
+        <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/90 text-white shadow-lg shadow-primary/30 backdrop-blur-sm">
+            <span class="material-symbols-outlined text-3xl">local_parking</span>
+        </div>
+        <div>
+            <span class="block text-xl font-bold tracking-tight">MyParking</span>
+            <span class="block text-xs font-medium text-slate-300 tracking-wider uppercase">Smart Parking</span>
+        </div>
+    </div>
+    <div class="relative z-20 max-w-xl space-y-4">
+        <h2 class="text-3xl font-bold leading-tight tracking-tight lg:text-4xl text-white" th:text="${panelTitle}">Únete a la red MyParking</h2>
+        <p class="text-slate-300 text-lg leading-relaxed max-w-md" th:text="${panelDesc}">Crea tu cuenta y empieza a gestionar tus espacios de manera inteligente hoy mismo.</p>
+    </div>
+    <div class="relative z-20 flex justify-between items-end border-t border-white/10 pt-6">
+        <p class="text-xs text-slate-400">© 2026 MyParking Inc.</p>
+        <div class="flex gap-4">
+            <a href="privacy_policy.html" class="text-xs text-slate-400 hover:text-white cursor-pointer">Privacidad</a>
+            <a href="terms_and_conditions.html" class="text-xs text-slate-400 hover:text-white cursor-pointer">Términos</a>
+        </div>
+    </div>
+</div>
+</html>

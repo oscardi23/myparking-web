@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/head :: head-main(~{})">
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+
+    <!-- Header Navigation -->
+    <div th:replace="layout/header :: header-main"></div>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 md:py-20 animate-fade-in">
+        
+        <!-- Welcome Section -->
+        <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4 text-slate-900 dark:text-white tracking-tight">¿Cómo podemos ayudarte?</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-lg">Encuentra respuestas rápidas o contáctanos directamente.</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="max-w-2xl mx-auto mb-16">
+            <div class="relative group">
+                <input type="text" id="search-input" placeholder="Busca un problema o pregunta..." 
+                    class="auth-input h-14 pl-12">
+                <span class="material-symbols-outlined absolute left-4 top-4 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+            </div>
+        </div>
+
+        <!-- FAQ and Contact Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16" id="faq">
+            
+            <!-- FAQ Section -->
+            <div class="auth-card">
+                <h2 class="text-xl font-bold mb-6 flex items-center gap-2 text-slate-900 dark:text-white">
+                    <span class="material-symbols-outlined text-primary">live_help</span> Preguntas Frecuentes
+                </h2>
+                <div class="space-y-6">
+                    <details class="faq-item group border-b border-slate-100 dark:border-slate-800 pb-4 cursor-pointer">
+                        <summary class="flex items-center justify-between font-semibold list-none group-open:text-primary transition-colors text-slate-800 dark:text-slate-200">
+                            ¿Qué es MyParking?
+                            <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                        </summary>
+                        <p class="mt-3 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Es una herramienta web para gestionar la operación diaria de un parqueadero. Controlar entradas y salidas, ver la ocupación y llevar el control de ingresos desde un solo lugar.
+                        </p>
+                    </details>
+                    
+                    <details class="faq-item group border-b border-slate-100 dark:border-slate-800 pb-4 cursor-pointer">
+                        <summary class="flex items-center justify-between font-semibold list-none group-open:text-primary transition-colors text-slate-800 dark:text-slate-200">
+                            ¿Necesito internet para usar la app?
+                            <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                        </summary>
+                        <p class="mt-3 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            No requiere instalación, funciona directamente desde el navegador web. Sin embargo, se recomienda una conexión a internet estable para sincronizar los datos.
+                        </p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="auth-card flex flex-col items-center text-center justify-center group/card">
+                <div class="h-16 w-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover/card:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-4xl">support_agent</span>
+                </div>
+                <h2 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">Soporte Directo</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-sm mb-8 leading-relaxed">
+                    Si no encuentras lo que buscas, nuestro equipo técnico está disponible para ayudarte de lunes a sábado de 8am a 6pm.
+                </p>
+                <div class="w-full space-y-3">
+                    <a href="mailto:soporte@myparking.com" 
+                       class="flex items-center justify-center gap-2 w-full py-4 bg-primary text-white rounded-xl font-bold hover:bg-blue-600 shadow-lg shadow-primary/20 transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-xl">mail</span> Enviar email
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Section -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <a th:href="@{/auth/terms}" class="p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary hover:shadow-md transition-all flex items-center gap-4 group">
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">description</span>
+                <span class="font-medium text-slate-700 dark:text-slate-300">Términos</span>
+            </a>
+            <a th:href="@{/auth/privacy}" class="p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary hover:shadow-md transition-all flex items-center gap-4 group">
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">shield</span>
+                <span class="font-medium text-slate-700 dark:text-slate-300">Privacidad</span>
+            </a>
+            <div class="p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-center gap-4">
+                <span class="material-symbols-outlined text-slate-400">verified</span>
+                <span class="font-medium text-slate-500 dark:text-slate-400">v1.0.4</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="layout/footer :: footer-main"></div>
+
+    <script th:src="@{/js/helper.js}"></script>
+    <script th:src="@{/js/taiwind-config.js}"></script>
+</body>
+
+</html>

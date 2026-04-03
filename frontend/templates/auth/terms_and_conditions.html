@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/head :: head-main(~{})">
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+
+    <!-- Header Navigation -->
+    <div th:replace="layout/header :: header-main"></div>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 md:py-20 animate-fade-in">
+        <div class="auth-card">
+            <h1 class="text-3xl md:text-4xl font-bold mb-8 text-slate-900 dark:text-white tracking-tight">
+                Términos y Condiciones
+            </h1>
+            
+            <p class="text-slate-500 dark:text-slate-400 mb-8 leading-relaxed">
+                Bienvenido, al utilizar nuestra plataforma, aceptas cumplir con los siguientes términos y condiciones. Por favor, léelos detenidamente.
+            </p>
+
+            <div class="space-y-10">
+                <!-- Sección 1 -->
+                <section>
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+                        <span class="material-symbols-outlined text-primary">gavel</span>
+                        <span>1. Aceptación de los Términos</span>
+                    </h2>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Al acceder y utilizar la plataforma, el usuario acepta de manera íntegra y sin reservas los términos establecidos en este documento.
+                    </p>
+                </section>
+
+                <!-- Sección 2 -->
+                <section>
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+                        <span class="material-symbols-outlined text-primary">person</span>
+                        <span>2. Obligaciones del Usuario</span>
+                    </h2>
+                    <ul class="list-disc ml-6 mt-4 space-y-2 text-slate-600 dark:text-slate-400">
+                        <li>Proporcionar información veraz y precisa en sus registros.</li>
+                        <li>Utilizar el sistema de forma lícita y ética.</li>
+                        <li>Respetar las normas de seguridad del parqueadero.</li>
+                    </ul>
+                </section>
+
+                <!-- Sección 3 -->
+                <section>
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+                        <span class="material-symbols-outlined text-primary">payments</span>
+                        <span>3. Tarifas y Pagos</span>
+                    </h2>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Las tarifas de estacionamiento son establecidas por cada establecimiento administrador. MyParking actúa como facilitador de la gestión y cobro.
+                    </p>
+                </section>
+
+                <div class="mt-12 pt-8 border-t border-slate-100 dark:border-slate-800 text-center">
+                    <p class="text-sm text-slate-400">Última actualización: 16 de enero de 2026</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="layout/footer :: footer-main"></div>
+
+    <script th:src="@{/js/taiwind-config.js}"></script>
+</body>
+</html>

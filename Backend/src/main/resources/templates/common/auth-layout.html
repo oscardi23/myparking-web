@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="light" lang="es">
+<head th:replace="~{common/auth-fragments :: head-common}">
+    <!-- This will be replaced by the common head fragment -->
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#0d131b] dark:text-white h-screen w-full overflow-hidden">
+    <div class="flex h-full w-full">
+        <!-- Left Panel: Integrated from Fragments -->
+        <div th:replace="~{common/auth-fragments :: left-panel-common}"></div>
+
+        <!-- Right Panel: Dynamic Content -->
+        <div class="flex w-full lg:w-1/2 flex-col justify-center items-center p-6 sm:p-12 overflow-y-auto bg-white dark:bg-background-dark relative">
+            <div class="absolute top-0 right-0 p-6">
+                <a class="text-sm font-medium text-[#4c6c9a] dark:text-slate-400 hover:text-primary transition-colors" href="help_center.html">Centro de ayuda</a>
+            </div>
+            
+            <div th:replace="${content}">
+                <!-- This is where login.html or register.html content will be injected -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

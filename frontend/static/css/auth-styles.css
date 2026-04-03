@@ -1,0 +1,83 @@
+/* MyParking - Auth Common Styles */
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+}
+
+/* Base Layout */
+.content-main-login {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.content-login-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* Fragments */
+.auth-side-panel {
+    width: 50%;
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .auth-side-panel {
+        display: flex;
+    }
+}
+
+/* Components */
+.auth-card {
+    @apply bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-8 md:p-12;
+}
+
+.auth-input {
+    @apply flex w-full h-12 px-4 rounded-lg border border-slate-200 dark:border-slate-600 
+           bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white
+           focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none 
+           placeholder:text-slate-400;
+}
+
+/* Height variation for login */
+.auth-input-lg {
+    @apply h-14;
+}
+
+.btn-auth-primary {
+    @apply flex w-full items-center justify-center rounded-lg bg-primary py-4 px-5 
+           text-base font-bold text-white shadow-md hover:bg-blue-600 
+           transition-all transform active:scale-[0.99] focus:outline-none 
+           focus:ring-2 focus:ring-primary/20 focus:ring-offset-2;
+}
+
+.auth-label {
+    @apply text-slate-900 dark:text-white text-sm font-medium mb-1.5;
+}
+
+.auth-header-title {
+    @apply text-slate-900 dark:text-white tracking-tight text-[32px] font-bold leading-tight;
+}
+
+.auth-header-desc {
+    @apply text-slate-500 dark:text-slate-400 text-sm font-normal;
+}
+
+/* OTP Inputs */
+.otp-input {
+    @apply w-11 h-12 sm:w-14 sm:h-14 text-center text-xl sm:text-2xl font-bold rounded-xl 
+           border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 
+           focus:border-primary focus:ring-2 focus:ring-primary/20 text-slate-900 
+           dark:text-white transition-all outline-none;
+}
