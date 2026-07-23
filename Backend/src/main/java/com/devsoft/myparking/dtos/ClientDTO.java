@@ -32,5 +32,5 @@ public class ClientDTO {
 
     private String email;
 
-    private boolean active;
+    private Boolean active;
 }

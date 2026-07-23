@@ -2,9 +2,7 @@ package com.devsoft.myparking.dtos;
 
 
 import com.devsoft.myparking.models.Role;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,8 +27,14 @@ public class UserRegisterDTO {
     @Size(min = 8, message = "Minimo 8 caracteres")
     private String password;
 
-    @NotBlank
+
     private String confirmPassword;
+
+
+    private String parkingId;
+
+
+    private String numberPhone;
 
 
 

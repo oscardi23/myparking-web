@@ -30,7 +30,7 @@ public class VehicleDTO {
     private String brand;
     private String color;
 
-    private boolean active;
+    private Boolean active;
 
     private String clientName;
     private String clientLastName;

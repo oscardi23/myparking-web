@@ -36,7 +36,7 @@ public class ParkingController {
         if(parkingId == null) {
             model.addAttribute("parking", new ParkingDTO());
             model.addAttribute("isNew", true);
-            return "/admin/parking";
+            return "/admin-parking";
 
         }
 
@@ -46,7 +46,7 @@ public class ParkingController {
 
         if (parking.isPresent()) {
 
-            model.addAttribute("parking", parking);
+            model.addAttribute("parking", parking.get());
             model.addAttribute("isNew", false);
 
 
@@ -55,7 +55,7 @@ public class ParkingController {
             model.addAttribute("isNew", true);
         }
 
-        return "admin/parking";
+        return "admin-parking";
     }
 
 
@@ -80,7 +80,7 @@ public class ParkingController {
     @PostMapping("/admin/parking/create")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> createParking(@Valid @RequestBody ParkingDTO parkingDTO,
-                                                             BindingResult result){
+                                                             BindingResult result, Authentication auth){
 
         if (result.hasErrors()){
 
@@ -92,7 +92,11 @@ public class ParkingController {
             return ApiResponse.error(errorMsg);
         }
         try{
-            ParkingDTO created = parkingService.createParking(parkingDTO);
+
+            CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+            String adminId = userDetails.getUserId();
+
+            ParkingDTO created = parkingService.createParking(parkingDTO, adminId);
             return ApiResponse.success(created);
         }catch (Exception e) {
             return ApiResponse.serverError("Error creando el parqueadero");

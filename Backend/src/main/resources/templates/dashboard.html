@@ -1,11 +1,92 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <head th:replace="layout/head :: head-main(title='Dashboard')">
-</head>
-<body>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
-<div>Hola aqui bienvenido dashboard</div>
+<!-- insert layout -->
+<th:block th:replace="~{layout/admin-layout :: admin-layout(title='Dashboard', content=~{::content})}">
 
-</body>
+    <!-- Fragmento que se va a inyectar -->
+    <th:block th:fragment="content">
+
+        <!-- 🔹 content dashboard -->
+
+        <!-- Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+
+            <div class="bg-white rounded-xl p-5 shadow">
+                <p class="text-sm text-gray-500">Clientes</p>
+                <p class="text-2xl font-bold" th:text="${totalClients ?: 0}">0</p>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 shadow">
+                <p class="text-sm text-gray-500">Vehículos</p>
+                <p class="text-2xl font-bold" th:text="${totalVehicles ?: 0}">0</p>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 shadow">
+                <p class="text-sm text-gray-500">Entradas hoy</p>
+                <p class="text-2xl font-bold" th:text="${todayEntries ?: 0}">0</p>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 shadow">
+                <p class="text-sm text-gray-500">Recaudo</p>
+                <p class="text-2xl font-bold">$<span th:text="${todayRevenue ?: 0}">0</span></p>
+            </div>
+
+        </div>
+
+        <!-- Accion -->
+        <div class="bg-white rounded-xl p-5 shadow mb-6">
+            <h2 class="font-semibold mb-4">Acciones rápidas</h2>
+
+            <div class="flex gap-3 flex-wrap">
+                <a th:href="@{/operator/entries}"
+                   class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                    Registrar entrada
+                </a>
+
+                <a th:href="@{/admin/clients}"
+                   class="bg-gray-200 px-4 py-2 rounded-lg">
+                    Nuevo cliente
+                </a>
+
+                <a th:href="@{/admin/vehicles}"
+                   class="bg-gray-200 px-4 py-2 rounded-lg">
+                    Nuevo vehículo
+                </a>
+            </div>
+        </div>
+
+        <!-- state -->
+        <div class="bg-white rounded-xl p-5 shadow">
+            <h2 class="font-semibold mb-4">Estado del parqueadero</h2>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+
+                <div class="text-center">
+                    <p class="text-sm text-gray-500">Carros</p>
+                    <p class="text-xl font-bold" th:text="${parking?.totalSpotsCar ?: 0}">0</p>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-sm text-gray-500">Motos</p>
+                    <p class="text-xl font-bold" th:text="${parking?.totalSpotsMotorcycle ?: 0}">0</p>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-sm text-gray-500">Bicicletas</p>
+                    <p class="text-xl font-bold" th:text="${parking?.totalSpotsBicycle ?: 0}">0</p>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-sm text-gray-500">Camiones</p>
+                    <p class="text-xl font-bold" th:text="${parking?.totalSpotsTruck ?: 0}">0</p>
+                </div>
+
+            </div>
+        </div>
+
+    </th:block>
+
+</th:block>
+
 </html>

@@ -41,7 +41,7 @@ public class ClientController {
         model.addAttribute("clients", clients);
         model.addAttribute("isEmpty", clients.isEmpty());
 
-        return "admin/clients";
+        return "admin_clients";
 
     }
 
@@ -98,6 +98,18 @@ public class ClientController {
 
             return  ApiResponse.error(e.getMessage());
         }
+
+
+    }
+
+    // get client by nationalId
+    @GetMapping("/clients/search")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> findClientByNationalId(@RequestParam String nationalId){
+
+        ClientDTO cliente = clientService.getClientByNationalId(nationalId);
+
+        return ApiResponse.success(cliente);
 
 
     }

@@ -49,6 +49,6 @@ public class ParkingDTO {
     @NotNull(message = "Las tarifas son obligatorias")
     private Map<VehicleType, ParkingRate> rates;
 
-    private boolean active;
+    private Boolean active = true;
 
 }

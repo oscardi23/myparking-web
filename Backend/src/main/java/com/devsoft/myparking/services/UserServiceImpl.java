@@ -8,6 +8,7 @@ import com.devsoft.myparking.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
 
+import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+
 public class UserServiceImpl implements UserService{
 
 
@@ -83,7 +85,8 @@ public class UserServiceImpl implements UserService{
                 user.getNumberPhone(),
                 user.getNationalId(),
                 user.getRole(),
-                user.isActive()
+                user.isActive(),
+                user.getParkingId()
         ) ;
     }
 
@@ -109,6 +112,7 @@ public class UserServiceImpl implements UserService{
         userDTO.setId(user.getId());
         userDTO.setEmail(user.getEmail());
         userDTO.setNumberPhone(user.getNumberPhone());
+        userDTO.setParkingId(user.getParkingId());
 
         return userDTO;
     }
@@ -161,6 +165,56 @@ public class UserServiceImpl implements UserService{
 
         userRepository.save(user);
 
+    }
+
+
+    // operators
+    @Override
+    public UserDTO registerOperators(UserRegisterDTO dto, String parkingId) {
+
+        if (userRepository.existsByEmail(dto.getEmail())){
+
+            throw new RuntimeException("Ya existe un usuario con ese correo");        }
+
+        User operator = new User();
+
+        operator.setName(dto.getName());
+        operator.setLastName(dto.getLastName());
+        operator.setEmail(dto.getEmail());
+        operator.setActive(true);
+        operator.setNumberPhone(dto.getNumberPhone());
+        operator.setPassword(passwordEncoder.encode(dto.getPassword()));
+        operator.setRole(Role.OPERATOR);
+        operator.setParkingId(parkingId);
+        operator.setEmailVerified(true);
+        operator.setCreatedAt(LocalDateTime.now());
+        operator.setUpdateAt(LocalDateTime.now());
+
+        User saved = userRepository.save(operator);
+
+        return convertToDTO(saved);
+
+
+
+    }
+
+    @Override
+    public List<UserDTO> findOperatorByParkingId(String parkingId) {
+        return userRepository.findByParkingIdAndRole(parkingId, Role.OPERATOR)
+                .stream()
+                .map(this::convertToDTO)
+                .toList();
+    }
+
+    @Override
+    public void toggleActive(String userId) {
+
+        User user = userRepository.findById(userId).
+                orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        user.setActive(!user.isActive());
+        user.setUpdateAt(LocalDateTime.now());
+        userRepository.save(user);
     }
 
 }

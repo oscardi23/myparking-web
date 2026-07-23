@@ -64,6 +64,7 @@ Thumbs.db
 # Logs
 logs/
 *.out
+out/
 
 # Java temp
 *.tmp

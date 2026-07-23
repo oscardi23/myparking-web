@@ -3,11 +3,14 @@ package com.devsoft.myparking.services;
 
 import com.devsoft.myparking.dtos.ParkingDTO;
 import com.devsoft.myparking.models.Parking;
+import com.devsoft.myparking.models.User;
 import com.devsoft.myparking.repository.ParkingRepository;
+import com.devsoft.myparking.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +19,10 @@ import java.util.Optional;
 public class ParkingServiceImpl implements ParkingService {
 
     private final ParkingRepository parkingRepository;
+
+    private final UserRepository userRepository;
     @Override
-    public ParkingDTO createParking(ParkingDTO parkingDTO) {
+    public ParkingDTO createParking(ParkingDTO parkingDTO, String adminId) {
 
 
 
@@ -48,7 +53,16 @@ public class ParkingServiceImpl implements ParkingService {
         newParking.setCreatedAt(LocalDateTime.now());
         newParking.setUpdatedAt(LocalDateTime.now());
 
+
+        newParking.setRates(parkingDTO.getRates() != null ? parkingDTO.getRates() : new HashMap<>());
+
         Parking saved = parkingRepository.save(newParking);
+
+        User admin = userRepository.findById(adminId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        admin.setParkingId(saved.getId());
+        userRepository.save(admin);
 
         return  convertToDTO(saved);
 

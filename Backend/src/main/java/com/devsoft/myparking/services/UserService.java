@@ -23,5 +23,12 @@ public interface UserService {
 
     void resetPassword(String email, String newPassword);
 
+    // operators
+    UserDTO registerOperators(UserRegisterDTO dto, String parkingId);
+
+    List<UserDTO> findOperatorByParkingId(String parkingId);
+
+    void toggleActive(String userId);
+
 
 }

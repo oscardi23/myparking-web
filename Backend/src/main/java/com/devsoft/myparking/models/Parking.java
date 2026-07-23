@@ -34,7 +34,7 @@ public class Parking {
 
     private Map<VehicleType, ParkingRate> rates;
 
-    private boolean active;
+    private boolean active = true;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

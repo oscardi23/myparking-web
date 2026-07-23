@@ -38,7 +38,7 @@ public class VehicleController {
         model.addAttribute("vehicles", vehicles);
         model.addAttribute("isEmpty", vehicles.isEmpty());
 
-        return "admin/vehicles";
+        return "admin-vehicles";
 
     }
 
@@ -115,7 +115,8 @@ public class VehicleController {
 
         try{
 
-            CustomUserDetails details = (CustomUserDetails) auth.getDetails();
+
+            CustomUserDetails details = (CustomUserDetails) auth.getPrincipal();
             String parkingId = details.getParkingId();
 
             VehicleDTO created = vehicleService.createVehicle(vehicleDTO, parkingId);

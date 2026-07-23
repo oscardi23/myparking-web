@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{layout/admin-layout :: admin-layout(title='Operadores', content=~{::content})}">
+    <th:block th:ref="content">
+
+        <!-- ── HEADER ─────────────────────────────────────────────────── -->
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h2 class="text-xl font-bold text-slate-800 dark:text-white">Operadores</h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Gestiona los operadores de tu parqueadero</p>
+            </div>
+            <button onclick="openCreateModal()"
+                    class="flex items-center gap-2 px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-blue-600 transition-colors">
+                <span class="material-symbols-outlined text-[18px]">person_add</span>
+                Nuevo operador
+            </button>
+        </div>
+
+        <!-- ── TABLA ──────────────────────────────────────────────────── -->
+        <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+
+            <!-- Empty state -->
+            <div th:if="${isEmpty}" class="flex flex-col items-center justify-center py-16 text-center">
+                <span class="material-symbols-outlined text-5xl text-slate-300 mb-3">badge</span>
+                <p class="text-slate-500 font-medium">No hay operadores registrados</p>
+                <p class="text-slate-400 text-sm mt-1">Crea el primer operador con el botón de arriba</p>
+            </div>
+
+            <!-- Table -->
+            <div th:if="${!isEmpty}" class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                    <tr class="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700/50">
+                        <th class="text-left px-5 py-3 font-semibold text-slate-600 dark:text-slate-300">Operador</th>
+                        <th class="text-left px-5 py-3 font-semibold text-slate-600 dark:text-slate-300">Email</th>
+                        <th class="text-left px-5 py-3 font-semibold text-slate-600 dark:text-slate-300">Teléfono</th>
+                        <th class="text-left px-5 py-3 font-semibold text-slate-600 dark:text-slate-300">Estado</th>
+                        <th class="text-left px-5 py-3 font-semibold text-slate-600 dark:text-slate-300">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="operator : ${operators}"
+                        class="border-b border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+
+                        <!-- Nombre -->
+                        <td class="px-5 py-3">
+                            <div class="flex items-center gap-3">
+                                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-amber-100 text-amber-600 font-bold text-sm shrink-0"
+                                     th:text="${operator.name.substring(0,1).toUpperCase()}">O</div>
+                                <div>
+                                    <p class="font-medium text-slate-800 dark:text-white"
+                                       th:text="${operator.name + ' ' + operator.lastName}">Nombre</p>
+                                    <p class="text-xs text-slate-400">Operador</p>
+                                </div>
+                            </div>
+                        </td>
+
+                        <!-- Email -->
+                        <td class="px-5 py-3 text-slate-600 dark:text-slate-300"
+                            th:text="${operator.email}">email</td>
+
+                        <!-- Teléfono -->
+                        <td class="px-5 py-3 text-slate-600 dark:text-slate-300"
+                            th:text="${operator.numberPhone ?: '—'}">300...</td>
+
+                        <!-- Estado -->
+                        <td class="px-5 py-3">
+                            <span th:if="${operator.active}"
+                                  class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+                                <span class="h-1.5 w-1.5 rounded-full bg-green-500"></span>
+                                Activo
+                            </span>
+                            <span th:unless="${operator.active}"
+                                  class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-600">
+                                <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span>
+                                Inactivo
+                            </span>
+                        </td>
+
+                        <!-- Acciones -->
+                        <td class="px-5 py-3">
+                            <div class="flex items-center gap-2">
+                                <button th:onclick="|toggleOperator('${operator.id}', ${operator.active})|"
+                                        th:class="${operator.active} ?
+                                            'flex items-center justify-center h-8 w-8 rounded-lg text-slate-500 hover:bg-red-50 hover:text-red-500 transition-colors' :
+                                            'flex items-center justify-center h-8 w-8 rounded-lg text-slate-500 hover:bg-green-50 hover:text-green-500 transition-colors'"
+                                        th:title="${operator.active} ? 'Desactivar' : 'Activar'">
+                                    <span class="material-symbols-outlined text-[18px]"
+                                          th:text="${operator.active} ? 'block' : 'check_circle'">block</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ── MODAL CREAR OPERADOR ───────────────────────────────────── -->
+        <div id="operator-modal"
+             class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/50 px-4">
+            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-xl w-full max-w-md">
+
+                <!-- Header -->
+                <div class="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-700">
+                    <h3 class="text-base font-semibold text-slate-800 dark:text-white">Nuevo operador</h3>
+                    <button onclick="closeModal()"
+                            class="flex items-center justify-center h-8 w-8 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">close</span>
+                    </button>
+                </div>
+
+                <!-- Body -->
+                <div class="px-6 py-5 flex flex-col gap-4">
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col gap-1">
+                            <label class="auth-label" for="op-name">Nombres</label>
+                            <input class="auth-input" id="op-name" type="text" placeholder="Ej: Juan"/>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label class="auth-label" for="op-lastname">Apellidos</label>
+                            <input class="auth-input" id="op-lastname" type="text" placeholder="Ej: García"/>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label class="auth-label" for="op-email">Email</label>
+                        <input class="auth-input" id="op-email" type="email" placeholder="operador@email.com"/>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label class="auth-label" for="op-phone">Teléfono <span class="text-slate-400 font-normal">(opcional)</span></label>
+                        <input class="auth-input" id="op-phone" type="text" placeholder="Ej: 3001234567"/>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <label class="auth-label" for="op-password">Contraseña temporal</label>
+                        <input class="auth-input" id="op-password" type="password" placeholder="Mínimo 8 caracteres"/>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="flex items-start gap-2 px-3 py-2.5 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800">
+                        <span class="material-symbols-outlined text-[16px] text-primary mt-0.5">info</span>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">
+                            El operador recibirá acceso al sistema con el email y contraseña que ingreses.
+                            Se recomienda que cambie su contraseña al ingresar.
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Footer -->
+                <div class="flex justify-end gap-3 px-6 py-4 border-t border-slate-200 dark:border-slate-700">
+                    <button onclick="closeModal()"
+                            class="px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-600 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                        Cancelar
+                    </button>
+                    <button id="btn-save-operator" onclick="saveOperator()"
+                            class="px-4 py-2 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-blue-600 transition-colors">
+                        Crear operador
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </th:block>
+</th:block>
+
+<script th:src="@{/js/admin-operators.js}"></script>
+
+</html>

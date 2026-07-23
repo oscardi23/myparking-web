@@ -13,6 +13,9 @@ public interface ClientRepository extends MongoRepository<Client, String> {
 
     List<Client> findByParkingId(String parkingId);
 
+
+    Optional<Client> findByNationalId(String nationalId);
+
     Optional<Client> findByNationalIdAndParkingId(String nationalId, String parkingId);
 
     boolean existsByNationalIdAndParkingId(String nationalId, String parkingId);

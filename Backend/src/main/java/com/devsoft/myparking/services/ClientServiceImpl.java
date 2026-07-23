@@ -26,10 +26,10 @@ public class ClientServiceImpl implements ClientService{
 
         client.setParkingId(parkingID);
         client.setName(clientDTO.getName());
-        client.setLastName(client.getLastName());
-        client.setNationalId(client.getNationalId());
-        client.setPhone(client.getPhone());
-        client.setEmail(client.getEmail());
+        client.setLastName(clientDTO.getLastName());
+        client.setNationalId(clientDTO.getNationalId());
+        client.setPhone(clientDTO.getPhone());
+        client.setEmail(clientDTO.getEmail());
         client.setActive(true);
         client.setCreatedAt(LocalDateTime.now());
         client.setUpdateAt(LocalDateTime.now());
@@ -62,6 +62,15 @@ public class ClientServiceImpl implements ClientService{
         return clientRepository.findById(clientId)
                 .map(this::convertToDTO)
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+    }
+
+    @Override
+    public ClientDTO getClientByNationalId(String nationalId) {
+
+        Client client = clientRepository.findByNationalId(nationalId).orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+        return convertToDTO(client);
+
     }
 
     @Override

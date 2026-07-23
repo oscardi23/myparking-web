@@ -20,7 +20,7 @@ public class CustomUserDetails implements UserDetails {
         return user.getParkingId();
     }
 
-
+    public String getUserId(){return  user.getId();}
     public String getFullName() {
         return user.getName() + " " + user.getLastName();
     }

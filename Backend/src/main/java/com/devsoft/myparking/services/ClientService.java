@@ -10,6 +10,8 @@ public interface ClientService {
 
     ClientDTO getClient(String clientId);
 
+    ClientDTO getClientByNationalId(String nationalId);
+
     List<ClientDTO> getClientsByParkingId(String parkingID);
 
     ClientDTO updateClient(ClientDTO clientDTO);

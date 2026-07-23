@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ParkingService {
 
-    ParkingDTO createParking(ParkingDTO parkingDTO);
+    ParkingDTO createParking(ParkingDTO parkingDTO, String adminId);
 
    Optional<ParkingDTO> getParking(String id);
 
