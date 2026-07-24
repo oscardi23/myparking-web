@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService{
                 user.getNumberPhone(),
                 user.getNationalId(),
                 user.getRole(),
-                user.isActive(),
+                user.getActive(),
                 user.getParkingId()
         ) ;
     }
@@ -111,6 +111,7 @@ public class UserServiceImpl implements UserService{
         userDTO.setLastName(user.getLastName());
         userDTO.setId(user.getId());
         userDTO.setEmail(user.getEmail());
+        userDTO.setActive(user.getActive());
         userDTO.setNumberPhone(user.getNumberPhone());
         userDTO.setParkingId(user.getParkingId());
 
@@ -138,7 +139,7 @@ public class UserServiceImpl implements UserService{
         user.setEmail(userDTO.getEmail());
         user.setRole(userDTO.getRole());
         user.setNumberPhone(userDTO.getNumberPhone());
-        user.setActive(userDTO.isActive());
+        user.setActive(userDTO.getActive());
         user.setNationalId(userDTO.getNationalId());
 
         User userSaved = userRepository.save(user);
@@ -212,7 +213,7 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findById(userId).
                 orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        user.setActive(!user.isActive());
+        user.setActive(!user.getActive());
         user.setUpdateAt(LocalDateTime.now());
         userRepository.save(user);
     }

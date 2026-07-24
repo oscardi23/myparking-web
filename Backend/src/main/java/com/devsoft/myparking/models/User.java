@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
 
@@ -31,7 +32,10 @@ public class User {
     private String password;
 
     private Role role;
-    private boolean active;
+
+
+    @Field("active")
+    private Boolean active;
     private boolean emailVerified;
 
     private LocalDateTime createdAt;

@@ -25,7 +25,7 @@ public class UserDTO {
 
     private Role role;
 
-    private boolean active;
+    private Boolean active;
 
     private String parkingId;
 

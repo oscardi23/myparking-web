@@ -42,7 +42,7 @@ public class OperatorController {
 
         List<UserDTO> listOperators = userService.findOperatorByParkingId(parkingId);
 
-        model.addAttribute("operator", listOperators);
+        model.addAttribute("operators", listOperators);
         model.addAttribute("isEmpty", listOperators.isEmpty());
 
 

@@ -75,13 +75,14 @@
                                   class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-600">
                                 <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span>
                                 Inactivo
+                                
                             </span>
                         </td>
 
                         <!-- Acciones -->
                         <td class="px-5 py-3">
                             <div class="flex items-center gap-2">
-                                <button th:onclick="|toggleOperator('${operator.id}', ${operator.active})|"
+                                <button th:attr="data-id=${operator.id}, data-active=${operator.active}" th:onclick="toggleOperator(this.dataset.id, this.dataset.active === 'true')"
                                         th:class="${operator.active} ?
                                             'flex items-center justify-center h-8 w-8 rounded-lg text-slate-500 hover:bg-red-50 hover:text-red-500 transition-colors' :
                                             'flex items-center justify-center h-8 w-8 rounded-lg text-slate-500 hover:bg-green-50 hover:text-green-500 transition-colors'"
