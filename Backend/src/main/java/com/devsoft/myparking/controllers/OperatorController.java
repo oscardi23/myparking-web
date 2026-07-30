@@ -26,14 +26,14 @@ import java.util.Map;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/admin")
+@RequestMapping("/operators")
 public class OperatorController {
 
 
     private final UserService userService;
 
 // show operators
-    @GetMapping("/operators")
+    @GetMapping("/list")
     public String showOperators(Authentication auth, Model model) {
 
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
@@ -46,13 +46,13 @@ public class OperatorController {
         model.addAttribute("isEmpty", listOperators.isEmpty());
 
 
-        return "admin-operators";
+        return "operators";
     }
 
 
     //create operator
 
-    @PostMapping("operators/create")
+    @PostMapping("/create")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> createOperator(@Valid @RequestBody UserRegisterDTO dto, BindingResult result, Authentication auth) {
 
@@ -67,26 +67,9 @@ public class OperatorController {
         System.out.println(dto.getNumberPhone());
         System.out.println(dto.getPassword());
 
-        if (result.hasErrors()){
 
 
 
-
-                FieldError error = result.getFieldError();
-
-                Map<String, Object> response = new HashMap<>();
-                response.put("ok", false);
-                response.put("campo", error.getField());
-                response.put("valor", error.getRejectedValue());
-                response.put("mensaje", error.getDefaultMessage());
-
-                return ResponseEntity.badRequest().body(response);
-
-
-
-        }
-
-        /*
 
         if (result.hasErrors()){
 
@@ -96,7 +79,7 @@ public class OperatorController {
                     .findFirst()
                     .orElse("Error de validacion");
             return ApiResponse.error(errorMsg);
-        }  */
+        }
 
 
         try {

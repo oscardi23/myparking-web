@@ -21,7 +21,7 @@ import java.util.Map;
 @Controller
 @AllArgsConstructor
 
-@RequestMapping("/admin")
+@RequestMapping("/clients")
 public class ClientController {
 
 
@@ -30,7 +30,7 @@ public class ClientController {
 
     //list clients
 
-    @GetMapping("/clients")
+    @GetMapping("/list")
     public String showClients(Authentication auth, Model model) {
 
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
@@ -41,13 +41,13 @@ public class ClientController {
         model.addAttribute("clients", clients);
         model.addAttribute("isEmpty", clients.isEmpty());
 
-        return "admin_clients";
+        return "clients";
 
     }
 
     //create clients
 
-    @PostMapping("/clients/create")
+    @PostMapping("/create")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> createClient(@Valid @RequestBody ClientDTO clientDTO, BindingResult result,
                                                             Authentication auth){
@@ -83,7 +83,7 @@ public class ClientController {
     }
 
     // get client by id
-    @GetMapping("/clients/{id}")
+    @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getClientById (@PathVariable String id){
 
@@ -103,7 +103,7 @@ public class ClientController {
     }
 
     // get client by nationalId
-    @GetMapping("/clients/search")
+    @GetMapping("/search")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> findClientByNationalId(@RequestParam String nationalId){
 
@@ -115,7 +115,7 @@ public class ClientController {
     }
 
     // update client
-    @PutMapping("/clients/update")
+    @PutMapping("/update")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> clientUpdate(@Valid @RequestBody ClientDTO clientDTO,
                                                             BindingResult result) {
@@ -146,7 +146,7 @@ public class ClientController {
 
     // enable- disable client
 
-    @PatchMapping("/clients/toggle/{id}")
+    @PatchMapping("/toggle/{id}")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> toggleActive(@PathVariable String id) {
 

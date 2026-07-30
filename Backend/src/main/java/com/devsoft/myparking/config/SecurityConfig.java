@@ -80,7 +80,7 @@ public class SecurityConfig {
                 .formLogin(login -> login
                         .loginPage("/auth/login")
                         .successHandler(customAuthSuccessHandler)
-                       .defaultSuccessUrl("/dashboard", true)
+                       .defaultSuccessUrl("/dashboard/list", true)
                         .failureUrl("/auth/login?error=true")
                         .permitAll()
 

@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
-@RequestMapping("/admin")
+@RequestMapping("/vehicles")
 @Controller
 public class VehicleController {
 
@@ -27,7 +27,7 @@ public class VehicleController {
 
     // list vehicles of parking
 
-    @GetMapping("/vehicles")
+    @GetMapping("/list")
     public String showVehicles(Authentication auth, Model model){
 
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
@@ -38,13 +38,13 @@ public class VehicleController {
         model.addAttribute("vehicles", vehicles);
         model.addAttribute("isEmpty", vehicles.isEmpty());
 
-        return "admin-vehicles";
+        return "vehicles";
 
     }
 
     // find vehicles by plate
 
-    @GetMapping("vehicles/search")
+    @GetMapping("/search")
     @ResponseBody
 
     public ResponseEntity<Map<String, Object>> searchByPlate(@RequestParam String plate) {
@@ -63,7 +63,7 @@ public class VehicleController {
     }
 
     // get vehicle by ID
-    @GetMapping("/vehicles/{id}")
+    @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getVehicleById(@PathVariable String id){
 
@@ -81,7 +81,7 @@ public class VehicleController {
 
 
     // find vehicles by client
-    @GetMapping("/vehicles/client/client{id}")
+    @GetMapping("/client/client{id}")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> findVehiclesByClient(@PathVariable String clientId) {
 
@@ -98,7 +98,7 @@ public class VehicleController {
 
     // create vehicle
 
-    @PostMapping("/vehicles/create")
+    @PostMapping("/create")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> createVehicle(@Valid @RequestBody VehicleDTO vehicleDTO,
                                                              BindingResult result, Authentication auth ) {
@@ -136,7 +136,7 @@ public class VehicleController {
 
     // update vehicle
 
-    @PutMapping("vehicles/update")
+    @PutMapping("/update")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> updateVehicle(@Valid @RequestBody VehicleDTO vehicleDTO,
                                                              BindingResult result){
@@ -168,7 +168,7 @@ public class VehicleController {
 
     // disable vehicle
 
-    @PatchMapping("vehicles/toggle/{id}")
+    @PatchMapping("/toggle/{id}")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> toggleActive(@PathVariable String id) {
 

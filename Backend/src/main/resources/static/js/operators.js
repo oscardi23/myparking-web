@@ -56,7 +56,7 @@ async function saveOperator() {
     btn.textContent = 'Creando...';
 
     try {
-        const res = await fetch('/admin/operators/create', {
+        const res = await fetch('/operators/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -89,7 +89,7 @@ async function toggleOperator(operatorId, isActive) {
     if (!confirm(`¿Deseas ${action} este operador?`)) return;
 
     try {
-        const res = await fetch(`/admin/operators/toggle/${operatorId}`, {
+        const res = await fetch(`/operators/toggle/${operatorId}`, {
             method: 'PATCH'
         });
 

@@ -18,7 +18,7 @@ async function openEditModal(vehicleId) {
     document.getElementById('modal-title').textContent = 'Editar vehículo';
 
     try {
-        const res = await fetch(`/admin/vehicles/${vehicleId}`);
+        const res = await fetch(`/vehicles/${vehicleId}`);
         const result = await res.json();
 
         if (!result.ok) {
@@ -75,7 +75,7 @@ async function searchClient() {
 
     try {
         // Buscamos el cliente via endpoint de clients
-        const res = await fetch(`/admin/clients/search?nationalId=${encodeURIComponent(nationalId)}`);
+        const res = await fetch(`/clients/search?nationalId=${encodeURIComponent(nationalId)}`);
         const result = await res.json();
 
         if (!result.ok) {
@@ -136,13 +136,13 @@ async function saveVehicle() {
 
         if (isEditing) {
             payload.id = document.getElementById('vehicle-id').value;
-            res = await fetch('/admin/vehicles/update', {
+            res = await fetch('/vehicles/update', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
         } else {
-            res = await fetch('/admin/vehicles/create', {
+            res = await fetch('/vehicles/create', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -176,7 +176,7 @@ async function toggleVehicle(vehicleId, isActive) {
     if (!confirm(`¿Deseas ${action} este vehículo?`)) return;
 
     try {
-        const res = await fetch(`/admin/vehicles/toggle/${vehicleId}`, {
+        const res = await fetch(`/vehicles/toggle/${vehicleId}`, {
             method: 'PATCH'
         });
 

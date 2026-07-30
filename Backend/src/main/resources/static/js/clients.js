@@ -18,7 +18,7 @@ async function openEditModal(clientId) {
     document.getElementById('modal-title').textContent = 'Editar cliente';
 
     try {
-        const res = await fetch(`/admin/clients/${clientId}`);
+        const res = await fetch(`/clients/${clientId}`);
         const result = await res.json();
 
         if (!result.ok) {
@@ -81,13 +81,13 @@ async function saveClient() {
 
         if (isEditing) {
             payload.id = document.getElementById('client-id').value;
-            res = await fetch('/admin/clients/update', {
+            res = await fetch('/clients/update', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
         } else {
-            res = await fetch('/admin/clients/create', {
+            res = await fetch('/clients/create', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -121,7 +121,7 @@ async function toggleClient(clientId, isActive) {
     if (!confirm(`¿Deseas ${action} este cliente?`)) return;
 
     try {
-        const res = await fetch(`/admin/clients/toggle/${clientId}`, {
+        const res = await fetch(`/clients/toggle/${clientId}`, {
             method: 'PATCH'
         });
 

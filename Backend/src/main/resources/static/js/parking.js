@@ -64,7 +64,7 @@ async function saveParking() {
     btn.textContent = 'Guardando...';
 
     try {
-        const url    = isNew ? '/admin/parking/create' : '/admin/parking/update';
+        const url    = isNew ? '/parking/create' : '/parking/update';
         const method = isNew ? 'POST' : 'PUT';
 
         const res = await fetch(url, {
@@ -97,7 +97,7 @@ async function toggleParking() {
     if (!confirm('¿Deseas cambiar el estado del parqueadero?')) return;
 
     try {
-        const res = await fetch('/admin/parking/toggle', { method: 'PATCH' });
+        const res = await fetch('/parking/toggle', { method: 'PATCH' });
         const result = await res.json();
 
         if (!result.ok) {

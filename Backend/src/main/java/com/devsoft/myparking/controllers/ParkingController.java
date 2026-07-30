@@ -20,6 +20,7 @@ import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
+@RequestMapping("/parking")
 
 public class ParkingController {
 
@@ -27,7 +28,7 @@ public class ParkingController {
 
     // show parking admin
 
-    @GetMapping("/admin/parking")
+    @GetMapping("/list")
     public String showParking(Authentication auth, Model model) {
 
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
@@ -36,7 +37,7 @@ public class ParkingController {
         if(parkingId == null) {
             model.addAttribute("parking", new ParkingDTO());
             model.addAttribute("isNew", true);
-            return "/admin-parking";
+            return "/parking";
 
         }
 
@@ -55,13 +56,13 @@ public class ParkingController {
             model.addAttribute("isNew", true);
         }
 
-        return "admin-parking";
+        return "parking";
     }
 
 
     // show super_admin parkings
 
-    @GetMapping("/super/parkings")
+    @GetMapping("/super/list")
     public String showAllParkings(Model model) {
 
         List<ParkingDTO> parkingDTOList = parkingService.getAllParkings();
@@ -69,7 +70,7 @@ public class ParkingController {
         model.addAttribute("parkings", parkingDTOList);
         model.addAttribute("isEmpty", parkingDTOList.isEmpty());
 
-        return "super/parkings";
+        return "super-parkings";
 
 
     }
@@ -77,7 +78,7 @@ public class ParkingController {
 
     // create parking
 
-    @PostMapping("/admin/parking/create")
+    @PostMapping("/create")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> createParking(@Valid @RequestBody ParkingDTO parkingDTO,
                                                              BindingResult result, Authentication auth){
@@ -107,7 +108,7 @@ public class ParkingController {
 
 
     // update parking
-    @PutMapping("/admin/parking/update")
+    @PutMapping("/update")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> updateParking(@Valid @RequestBody ParkingDTO parkingDTO, BindingResult result) {
 
@@ -134,7 +135,7 @@ public class ParkingController {
 
     // enable - disable parking
 
-    @PatchMapping("/admin/parking/toggle")
+    @PatchMapping("/toggle")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> toggleActive(Authentication auth) {
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
