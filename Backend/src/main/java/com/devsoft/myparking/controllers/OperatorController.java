@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +35,7 @@ public class OperatorController {
 
 // show operators
     @GetMapping("/list")
+    @PreAuthorize("hasAnyRole('ADMIN', 'OPERATOR')")
     public String showOperators(Authentication auth, Model model) {
 
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
@@ -53,6 +55,7 @@ public class OperatorController {
     //create operator
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> createOperator(@Valid @RequestBody UserRegisterDTO dto, BindingResult result, Authentication auth) {
 
@@ -107,6 +110,7 @@ public class OperatorController {
     // enabled disable operator
 
     @PatchMapping("toggle/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
 
     public ResponseEntity<Map<String, Object>> toggleOperator(@PathVariable String id){
