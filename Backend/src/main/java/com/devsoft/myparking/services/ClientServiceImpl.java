@@ -106,4 +106,9 @@ public class ClientServiceImpl implements ClientService{
         clientRepository.save(client);
 
     }
+
+    @Override
+    public long countClients() {
+        return clientRepository.count();
+    }
 }

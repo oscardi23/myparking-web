@@ -8,6 +8,7 @@ import com.devsoft.myparking.util.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ public class ParkingController {
     // show parking admin
 
     @GetMapping("/list")
+    @PreAuthorize("hasAnyRole('ADMIN', 'OPERATOR')")
     public String showParking(Authentication auth, Model model) {
 
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
@@ -63,6 +65,7 @@ public class ParkingController {
     // show super_admin parkings
 
     @GetMapping("/super/list")
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
     public String showAllParkings(Model model) {
 
         List<ParkingDTO> parkingDTOList = parkingService.getAllParkings();
@@ -79,6 +82,7 @@ public class ParkingController {
     // create parking
 
     @PostMapping("/create")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN')")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> createParking(@Valid @RequestBody ParkingDTO parkingDTO,
                                                              BindingResult result, Authentication auth){
@@ -109,6 +113,7 @@ public class ParkingController {
 
     // update parking
     @PutMapping("/update")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN')")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> updateParking(@Valid @RequestBody ParkingDTO parkingDTO, BindingResult result) {
 
@@ -136,6 +141,7 @@ public class ParkingController {
     // enable - disable parking
 
     @PatchMapping("/toggle")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN')")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> toggleActive(Authentication auth) {
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();

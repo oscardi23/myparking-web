@@ -21,6 +21,8 @@ public interface VehicleService {
 
     void toggleActive(String vehicleId);
 
+    Long countVehicles();
+
 
 
 

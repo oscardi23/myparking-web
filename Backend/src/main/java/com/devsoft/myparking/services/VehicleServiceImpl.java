@@ -105,6 +105,11 @@ public class VehicleServiceImpl implements VehicleService{
 
     }
 
+    @Override
+    public Long countVehicles() {
+        return vehicleRepository.count();
+    }
+
     private VehicleDTO convertToDTO(Vehicle vehicle){
 
 

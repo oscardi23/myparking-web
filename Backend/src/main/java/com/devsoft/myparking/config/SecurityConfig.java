@@ -1,10 +1,8 @@
 package com.devsoft.myparking.config;
 
+import com.devsoft.myparking.security.CustomAccessDeniedHandler;
 import com.devsoft.myparking.security.CustomAuthSuccessHandler;
-import com.devsoft.myparking.security.CustomUserDetails;
 import com.devsoft.myparking.security.CustomUserDetailsService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +12,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 
 
 @Configuration
@@ -27,6 +24,8 @@ public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
     private final CustomAuthSuccessHandler customAuthSuccessHandler;
+
+    private final CustomAccessDeniedHandler accessDeniedHandler;
 
 
 
@@ -93,14 +92,20 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/auth/login?logout=true")
                         .permitAll()
                 )
-                .requestCache(cache -> cache.disable())
 
-                .exceptionHandling(exceptions -> exceptions
+                .exceptionHandling(exception -> exception
+
+                        .accessDeniedHandler(accessDeniedHandler)
                         .authenticationEntryPoint((request, response, authException) ->
                         {
                             response.sendRedirect("/auth/login");
                         })
                 );
+
+
+
+
+
 
         return http.build();
 

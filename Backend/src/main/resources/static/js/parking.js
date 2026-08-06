@@ -106,7 +106,7 @@ async function toggleParking() {
         }
 
         showToast('Estado del parqueadero actualizado');
-        setTimeout(() => location.reload(), 1000);
+        setTimeout(() => location.reload(), 1500);
 
     } catch (e) {
         showToast('Error de conexión', 'error');

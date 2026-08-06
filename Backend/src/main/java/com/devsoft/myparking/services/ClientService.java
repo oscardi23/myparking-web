@@ -17,4 +17,6 @@ public interface ClientService {
     ClientDTO updateClient(ClientDTO clientDTO);
 
     void toggleActive(String clientId);
+
+    long countClients();
 }
